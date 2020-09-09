@@ -1,57 +1,65 @@
 body {
-    font-family: "Arial", sans-serif;
+  font-family: "Arial", sans-serif;
 }
+
 section {
-    text-align: center;
+  text-align: center;
 }
+
 .game--container {
-    display: grid;
-    grid-template-columns: repeat(3, auto);
-    width: 306px;
-    margin: 50px auto;
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  width: 306px;
+  margin: 50px auto;
 }
+
 .cell {
-    font-family: "Permanent Marker", cursive;
-    width: 100px;
-    height: 100px;
-    box-shadow: 0 0 0 1px #333333;
-    border: 1px solid #333333;
-    cursor: pointer;
-    line-height: 100px;
-    font-size: 60px;
+  font-family: "Permanent Marker", cursive;
+  width: 100px;
+  height: 100px;
+  box-shadow: 0 0 0 1px #333;
+  border: 1px solid #333;
+  cursor: pointer;
+  line-height: 100px;
+  font-size: 60px;
 }
+
 form {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 
 .start {
-    padding: 20px;
-    background-color: teal;
+  padding: 20px;
+  background-color: teal;
 }
+
 .game--start {
-    padding: 10px 20px;
-    background: transparent;
-    border: 2px solid tomato;
-    outline: none;
-    cursor: pointer;
+  padding: 10px 20px;
+  background: transparent;
+  border: 2px solid tomato;
+  outline: none;
+  cursor: pointer;
 }
+
 .game--start:hover {
-    background-color: tomato;
+  background-color: tomato;
 }
+
 .d-hidden {
-    visibility: hidden;
+  visibility: hidden;
 }
+
 .d-none {
-    display: none !important;
+  display: none !important;
 }
 
 .alert {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 
 .message {
-    background-color: tomato;
-    padding: 10px 100px;
+  background-color: tomato;
+  padding: 10px 100px;
 }
