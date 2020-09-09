@@ -39,3 +39,6 @@ form {
 .game--start:hover {
     background-color: tomato;
 }
+.d-hidden {
+    visibility: hidden;
+}

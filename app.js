@@ -1,4 +1,5 @@
 const statusDisplay = document.querySelector('.game--status');
+const board = document.querySelector('.board')
 const form = document.getElementById('form')
 let gameActive = true;
 
@@ -13,6 +14,9 @@ let playerTwo = new Player('', "O")
 const btnStart = document.querySelector('.game--start')
 btnStart.addEventListener('click', (e) => {
     e.preventDefault()
+    form.classList.add('d-hidden')
+    board.classList.remove('d-hidden')
+
     const playerOneName = document.querySelector('#fplayer').value
     const playerTwoName = document.querySelector('#splayer').value
     playerOne["name"] = playerOneName;
@@ -104,5 +108,11 @@ function handleRestartGame() {
     statusDisplay.innerHTML = currentPlayerTurn();
     document.querySelectorAll('.cell')
         .forEach(cell => cell.innerHTML = "");
+    
+    form.classList.remove('d-hidden')
+    board.classList.add('d-hidden')
+
+    document.querySelector('#fplayer').value = ''
+    document.querySelector('#splayer').value = ''
 }
 document.querySelector('.game--restart').addEventListener('click', handleRestartGame);
