@@ -19,20 +19,21 @@ btnStart.addEventListener('click', (e) => {
     playerTwo["name"] = playerTwoName;
     console.log(playerOne, playerTwo)
 
+    statusDisplay.innerHTML = currentPlayerTurn(playerOne.name);
+
     document.querySelectorAll('.cell').forEach(cell => cell.addEventListener('click', handleCellClick));
 })
 
 
 
-let currentPlayer = playerOne.name;
+let currentPlayer;
 let currentMove = playerOne.symbol
 let gameState = ["", "", "", "", "", "", "", "", ""];
 
 const winningMessage = () => `Player ${currentPlayer} has won!`;
 const drawMessage = () => `Game ended in a draw!`;
-const currentPlayerTurn = () => `It's ${currentPlayer}'s turn`;
+const currentPlayerTurn = (cp) => `It's ${cp}'s turn`;
 
-statusDisplay.innerHTML = currentPlayerTurn();
 function handleCellPlayed(clickedCell, clickedCellIndex) {
     gameState[clickedCellIndex] = currentMove;
     clickedCell.innerHTML = currentMove;
@@ -40,9 +41,9 @@ function handleCellPlayed(clickedCell, clickedCellIndex) {
 }
 function handlePlayerChange() {
 
-    currentPlayer = currentPlayer === playerOne.name ? playerTwo.name : playerOne.name;
+    currentPlayer = currentPlayer === playerTwo.name ? playerOne.name : playerTwo.name;
     currentMove = currentMove === playerOne.symbol ? playerTwo.symbol : playerOne.symbol;
-    statusDisplay.innerHTML = currentPlayerTurn();
+    statusDisplay.innerHTML = currentPlayerTurn(currentPlayer);
 
 }
 const winningConditions = [
