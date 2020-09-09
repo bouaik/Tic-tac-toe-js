@@ -42,3 +42,16 @@ form {
 .d-hidden {
     visibility: hidden;
 }
+.d-none {
+    display: none !important;
+}
+
+.alert {
+    display: flex;
+    justify-content: center;
+}
+
+.message {
+    background-color: tomato;
+    padding: 10px 100px;
+}

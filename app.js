@@ -1,6 +1,7 @@
 const statusDisplay = document.querySelector('.game--status');
 const board = document.querySelector('.board')
 const form = document.getElementById('form')
+const alert = document.querySelector('.alert')
 let gameActive = true;
 
 function Player  (name, symbol) {
@@ -14,18 +15,25 @@ let playerTwo = new Player('', "O")
 const btnStart = document.querySelector('.game--start')
 btnStart.addEventListener('click', (e) => {
     e.preventDefault()
-    form.classList.add('d-hidden')
-    board.classList.remove('d-hidden')
 
     const playerOneName = document.querySelector('#fplayer').value
     const playerTwoName = document.querySelector('#splayer').value
-    playerOne["name"] = playerOneName;
-    playerTwo["name"] = playerTwoName;
-    console.log(playerOne, playerTwo)
 
-    statusDisplay.innerHTML = currentPlayerTurn(playerOne.name);
+    if (playerOneName === "" || playerTwoName === "") {
+        console.log('players fields empty')
+        alert.classList.remove('d-none')
+    } else {
+        alert.classList.add('d-none')
+        form.classList.add('d-hidden')
+        board.classList.remove('d-hidden')
+        playerOne["name"] = playerOneName;
+        playerTwo["name"] = playerTwoName;
+        console.log(playerOne, playerTwo)
 
-    document.querySelectorAll('.cell').forEach(cell => cell.addEventListener('click', handleCellClick));
+        statusDisplay.innerHTML = currentPlayerTurn(playerOne.name);
+
+        document.querySelectorAll('.cell').forEach(cell => cell.addEventListener('click', handleCellClick));
+    }    
 })
 
 
