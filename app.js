@@ -12,7 +12,7 @@ const Board = (() => {
 
 const domContent = (() => {
   const currentPlayerTurn = (cp) => `It's ${cp}'s turn`;
-  const winningMessage = () => `Player ${Game.currentPlayer} has won!`; // eslint-disable-line
+  const winningMessage = (currentPlayer) => `Player ${currentPlayer} has won!`;
   const drawMessage = () => 'Game ended in a draw!';
   const statusDisplay = document.querySelector('.game--status');
   const board = document.querySelector('.board');
@@ -66,7 +66,48 @@ const Game = (() => {
   const playerOne = Player('', 'X');
   const playerTwo = Player('', 'O');
   let currentPlayer;
-  const currentMove = playerOne.symbol;
+  let currentMove = playerOne.symbol;
+
+  function handleCellPlayed(clickedCell, clickedCellIndex) {
+    Board.gameState[clickedCellIndex] = currentMove;
+    clickedCell.innerHTML = currentMove;
+  }
+
+  function handlePlayerChange() {
+    currentPlayer = currentPlayer === playerTwo.name ? playerOne.name : playerTwo.name;
+    currentMove = currentMove === playerOne.symbol ? playerTwo.symbol : playerOne.symbol;
+    domContent.statusDisplay.innerHTML = domContent.currentPlayerTurn(currentPlayer);
+  }
+
+
+  function handleResultValidation() {
+    let roundWon = false;
+    for (let i = 0; i <= 7; i += 1) {
+      const winCondition = Game.winningConditions[i];
+      const a = Board.gameState[winCondition[0]];
+      const b = Board.gameState[winCondition[1]];
+      const c = Board.gameState[winCondition[2]];
+      if (a === '' || b === '' || c === '') {
+        continue;  // eslint-disable-line
+      }
+      if (a === b && b === c) {
+        roundWon = true;
+        break;
+      }
+    }
+    if (roundWon) {
+      domContent.statusDisplay.innerHTML = domContent.winningMessage(currentPlayer);
+      gameActive = false;
+      return;
+    }
+    const roundDraw = !Board.gameState.includes('');
+    if (roundDraw) {
+      domContent.statusDisplay.innerHTML = domContent.drawMessage();
+      gameActive = false;
+      return;
+    }
+    handlePlayerChange();
+  }
 
   const handleCellClick = (clickedCellEvent) => {
     const clickedCell = clickedCellEvent.target;
@@ -92,59 +133,19 @@ const Game = (() => {
       domContent.showAlert();
     } else {
       domContent.showBoard();
-      Game.playerOne.name = playerOneName;
-      Game.playerTwo.name = playerTwoName;
+      playerOne.name = playerOneName;
+      playerTwo.name = playerTwoName;
 
-      domContent.statusDisplay.innerHTML = domContent.currentPlayerTurn(Game.playerOne.name);
+      domContent.statusDisplay.innerHTML = domContent.currentPlayerTurn(playerOne.name);
 
       document.querySelectorAll('.cell').forEach(cell => cell.addEventListener('click', handleCellClick));
     }
   });
 
 
-  function handleCellPlayed(clickedCell, clickedCellIndex) {
-    Board.gameState[clickedCellIndex] = Game.currentMove;
-    clickedCell.innerHTML = Game.currentMove;
-  }
-  function handlePlayerChange() {
-    Game.currentPlayer = Game.currentPlayer === Game.playerTwo.name ? Game.playerOne.name : Game.playerTwo.name; // eslint-disable-line
-    Game.currentMove = Game.currentMove === Game.playerOne.symbol ? Game.playerTwo.symbol : Game.playerOne.symbol; // eslint-disable-line
-    domContent.statusDisplay.innerHTML = domContent.currentPlayerTurn(Game.currentPlayer);
-  }
-
-
-  function handleResultValidation() {
-    let roundWon = false;
-    for (let i = 0; i <= 7; i += 1) {
-      const winCondition = Game.winningConditions[i];
-      const a = Board.gameState[winCondition[0]];
-      const b = Board.gameState[winCondition[1]];
-      const c = Board.gameState[winCondition[2]];
-      if (a === '' || b === '' || c === '') {
-        continue;  // eslint-disable-line
-      }
-      if (a === b && b === c) {
-        roundWon = true;
-        break;
-      }
-    }
-    if (roundWon) {
-      domContent.statusDisplay.innerHTML = domContent.winningMessage();
-      gameActive = false;
-      return;
-    }
-    const roundDraw = !Board.gameState.includes('');
-    if (roundDraw) {
-      domContent.statusDisplay.innerHTML = domContent.drawMessage();
-      gameActive = false;
-      return;
-    }
-    handlePlayerChange();
-  }
-
   function handleRestartGame() {
     gameActive = true;
-    Game.currentPlayer = Game.playerOne.name;
+    currentPlayer = playerOne.name;
     Board.gameState = new Array(9).fill('');
     domContent.statusDisplay.innerHTML = domContent.currentPlayerTurn();
     /* eslint-disable no-return-assign */
@@ -159,9 +160,6 @@ const Game = (() => {
   document.querySelector('.game--restart').addEventListener('click', handleRestartGame);
 
   return {
-    playerOne, playerTwo, currentPlayer, currentMove, winningConditions,
+    winningConditions,
   };
 })();
-
-
-/* eslint no-use-before-define: ["error", { "functions": false }] */
