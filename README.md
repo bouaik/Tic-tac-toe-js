@@ -20,7 +20,18 @@
 ## Live Demo
  [Live](https://rawcdn.githack.com/bouaik/Tic-tac-toe-js/a87b1b1b34dd20f6924d4d021341d4b32dde5347/index.html)
 
+## install
+run this commands in your terminal
 
+```
+git clone https://github.com/bouaik/Tic-tac-toe-js.git
+cd Tic-tac-toe-js/
+```
+
+
+Now you can open index.html in your browser to see TicTac-toe up and running.
+
+Enjoy playing it.
 
 ## Authors
 
