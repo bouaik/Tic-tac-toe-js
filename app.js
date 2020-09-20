@@ -36,7 +36,7 @@ const Game = (() => {
   function handlePlayerChange() {
     currentPlayer = currentPlayer === playerTwo.name ? playerOne.name : playerTwo.name;
     currentMove = currentMove === playerOne.symbol ? playerTwo.symbol : playerOne.symbol;
-    domContent.statusDisplay.innerHTML = domContent.currentPlayerTurn(currentPlayer);
+    // domContent.statusDisplay.innerHTML = domContent.currentPlayerTurn(currentPlayer);
   }
 
 
@@ -81,26 +81,27 @@ const Game = (() => {
     handleResultValidation();
   };
 
-
-  const btnStart = document.querySelector('.game--start');
-  btnStart.addEventListener('click', (e) => {
-    e.preventDefault();
-
-    const playerOneName = document.querySelector('#fplayer').value;
-    const playerTwoName = document.querySelector('#splayer').value;
-
-    if (playerOneName === '' || playerTwoName === '') {
-      domContent.showAlert();
-    } else {
-      domContent.showBoard();
-      playerOne.name = playerOneName;
-      playerTwo.name = playerTwoName;
-
-      domContent.statusDisplay.innerHTML = domContent.currentPlayerTurn(playerOne.name);
-
-      document.querySelectorAll('.cell').forEach(cell => cell.addEventListener('click', handleCellClick));
-    }
+  document.addEventListener('DOMContentLoaded', () => {
+    const btnStart = document.querySelector('.game--start');
+    btnStart.addEventListener('click', (e) => {
+      e.preventDefault();
+  
+      const playerOneName = document.querySelector('#fplayer').value;
+      const playerTwoName = document.querySelector('#splayer').value;
+  
+      if (playerOneName === '' || playerTwoName === '') {
+        domContent.showAlert();
+      } else {
+        domContent.showBoard();
+        playerOne.name = playerOneName;
+        playerTwo.name = playerTwoName;
+  
+        domContent.statusDisplay.innerHTML = domContent.currentPlayerTurn(playerOne.name);
+        domContent.checkchinking(handleCellClick)
+      }
+    });
   });
+  
 
 
   function handleRestartGame() {
@@ -116,10 +117,15 @@ const Game = (() => {
 
     domContent.clearFields();
   }
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelector('.game--restart').addEventListener('click', handleRestartGame);
+  })
 
-  document.querySelector('.game--restart').addEventListener('click', handleRestartGame);
 
   return {
     winningConditions,
+    handlePlayerChange
   };
 })();
+
+export default Game

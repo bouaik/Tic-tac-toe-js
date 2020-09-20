@@ -25,6 +25,11 @@ const domContent = (() => { // eslint-disable-line
     document.querySelector('#splayer').value = '';
   };
 
+  const checkchinking = (cb) => {
+    document.querySelectorAll('.cell').forEach(cell => cell.addEventListener('click', cb));
+  }
+  
+
 
   return {
     currentPlayerTurn,
@@ -35,5 +40,6 @@ const domContent = (() => { // eslint-disable-line
     showAlert,
     removeBoard,
     clearFields,
+    checkchinking
   };
 })();
