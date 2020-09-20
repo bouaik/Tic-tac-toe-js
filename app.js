@@ -30,7 +30,7 @@ const Game = (() => {
 
   function handleCellPlayed(clickedCell, clickedCellIndex) {
     Board.gameState[clickedCellIndex] = currentMove;
-    clickedCell.innerHTML = currentMove;
+    // clickedCell.innerHTML = currentMove;
   }
 
   function handlePlayerChange() {
@@ -54,13 +54,12 @@ const Game = (() => {
         break;
       }
     }
-    return roundWon
-  }
+    return roundWon;
+  };
 
 
   function handleResultValidation() {
-    
-    let roundWon = checkWin(Board)
+    const roundWon = checkWin(Board);
 
     if (roundWon) {
       domContent.statusDisplay.innerHTML = domContent.winningMessage(currentPlayer);
@@ -74,7 +73,7 @@ const Game = (() => {
       return;
     }
     handlePlayerChange();
-    return {roundWon, gameActive}
+    return { roundWon, gameActive };
   }
 
   const handleCellClick = (clickedCellEvent) => {
@@ -93,23 +92,22 @@ const Game = (() => {
     const btnStart = document.querySelector('.game--start');
     btnStart.addEventListener('click', (e) => {
       e.preventDefault();
-  
+
       const playerOneName = document.querySelector('#fplayer').value;
       const playerTwoName = document.querySelector('#splayer').value;
-  
+
       if (playerOneName === '' || playerTwoName === '') {
         domContent.showAlert();
       } else {
         domContent.showBoard();
         playerOne.name = playerOneName;
         playerTwo.name = playerTwoName;
-  
+
         domContent.statusDisplay.innerHTML = domContent.currentPlayerTurn(playerOne.name);
-        domContent.checkchinking(handleCellClick)
+        domContent.checkchinking(handleCellClick);
       }
     });
   });
-  
 
 
   function handleRestartGame() {
@@ -118,8 +116,8 @@ const Game = (() => {
     Board.gameState = new Array(9).fill('');
     domContent.statusDisplay.innerHTML = domContent.currentPlayerTurn();
     /* eslint-disable no-return-assign */
-    document.querySelectorAll('.cell')
-      .forEach(cell => cell.innerHTML = '');
+    // document.querySelectorAll('.cell')
+    //   .forEach(cell => cell.innerHTML = '');
     /* eslint-enable no-return-assign */
     domContent.removeBoard();
 
@@ -127,7 +125,7 @@ const Game = (() => {
   }
   document.addEventListener('DOMContentLoaded', () => {
     document.querySelector('.game--restart').addEventListener('click', handleRestartGame);
-  })
+  });
 
 
   return {
@@ -135,7 +133,8 @@ const Game = (() => {
     handlePlayerChange,
     handleResultValidation,
     handleCellPlayed,
-    checkWin
+    checkWin,
+    handleRestartGame
   };
 })();
 

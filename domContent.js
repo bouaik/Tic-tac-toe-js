@@ -27,8 +27,7 @@ const domContent = (() => { // eslint-disable-line
 
   const checkchinking = (cb) => {
     document.querySelectorAll('.cell').forEach(cell => cell.addEventListener('click', cb));
-  }
-  
+  };
 
 
   return {
@@ -40,6 +39,6 @@ const domContent = (() => { // eslint-disable-line
     showAlert,
     removeBoard,
     clearFields,
-    checkchinking
+    checkchinking,
   };
 })();
