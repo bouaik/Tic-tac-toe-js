@@ -39,8 +39,7 @@ const Game = (() => {
     // domContent.statusDisplay.innerHTML = domContent.currentPlayerTurn(currentPlayer);
   }
 
-
-  function handleResultValidation() {
+  const checkWin = (Board) => {
     let roundWon = false;
     for (let i = 0; i <= 7; i += 1) {
       const winCondition = Game.winningConditions[i];
@@ -54,8 +53,15 @@ const Game = (() => {
         roundWon = true;
         break;
       }
-      console.log(a)
     }
+    return roundWon
+  }
+
+
+  function handleResultValidation() {
+    
+    let roundWon = checkWin(Board)
+
     if (roundWon) {
       domContent.statusDisplay.innerHTML = domContent.winningMessage(currentPlayer);
       gameActive = false;
@@ -127,7 +133,9 @@ const Game = (() => {
   return {
     winningConditions,
     handlePlayerChange,
-    handleResultValidation
+    handleResultValidation,
+    handleCellPlayed,
+    checkWin
   };
 })();
 
