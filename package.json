@@ -1,0 +1,24 @@
+{
+  "name": "Tic-tac-toe-js",
+  "version": "1.0.0",
+  "description": "> This is a Tic Tac game built by javascript",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bouaik/Tic-tac-toe-js.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bouaik/Tic-tac-toe-js/issues"
+  },
+  "homepage": "https://github.com/bouaik/Tic-tac-toe-js#readme",
+  "devDependencies": {
+    "@babel/preset-env": "^7.11.5",
+    "jest": "^26.4.2"
+  }
+}
