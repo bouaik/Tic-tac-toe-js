@@ -30,17 +30,16 @@ const Game = (() => {
 
   function handleCellPlayed(clickedCell, clickedCellIndex) {
     Board.gameState[clickedCellIndex] = currentMove;
-    clickedCell.innerHTML = currentMove;
+    // clickedCell.innerHTML = currentMove;
   }
 
   function handlePlayerChange() {
     currentPlayer = currentPlayer === playerTwo.name ? playerOne.name : playerTwo.name;
     currentMove = currentMove === playerOne.symbol ? playerTwo.symbol : playerOne.symbol;
-    domContent.statusDisplay.innerHTML = domContent.currentPlayerTurn(currentPlayer);
+    // domContent.statusDisplay.innerHTML = domContent.currentPlayerTurn(currentPlayer);
   }
 
-
-  function handleResultValidation() {
+  const checkWin = (Board) => {
     let roundWon = false;
     for (let i = 0; i <= 7; i += 1) {
       const winCondition = Game.winningConditions[i];
@@ -55,6 +54,13 @@ const Game = (() => {
         break;
       }
     }
+    return roundWon;
+  };
+
+
+  function handleResultValidation() {
+    const roundWon = checkWin(Board);
+
     if (roundWon) {
       domContent.statusDisplay.innerHTML = domContent.winningMessage(currentPlayer);
       gameActive = false;
@@ -67,6 +73,7 @@ const Game = (() => {
       return;
     }
     handlePlayerChange();
+    return { roundWon, gameActive }; // eslint-disable-line
   }
 
   const handleCellClick = (clickedCellEvent) => {
@@ -81,25 +88,25 @@ const Game = (() => {
     handleResultValidation();
   };
 
+  document.addEventListener('DOMContentLoaded', () => {
+    const btnStart = document.querySelector('.game--start');
+    btnStart.addEventListener('click', (e) => {
+      e.preventDefault();
 
-  const btnStart = document.querySelector('.game--start');
-  btnStart.addEventListener('click', (e) => {
-    e.preventDefault();
+      const playerOneName = document.querySelector('#fplayer').value;
+      const playerTwoName = document.querySelector('#splayer').value;
 
-    const playerOneName = document.querySelector('#fplayer').value;
-    const playerTwoName = document.querySelector('#splayer').value;
+      if (playerOneName === '' || playerTwoName === '') {
+        domContent.showAlert();
+      } else {
+        domContent.showBoard();
+        playerOne.name = playerOneName;
+        playerTwo.name = playerTwoName;
 
-    if (playerOneName === '' || playerTwoName === '') {
-      domContent.showAlert();
-    } else {
-      domContent.showBoard();
-      playerOne.name = playerOneName;
-      playerTwo.name = playerTwoName;
-
-      domContent.statusDisplay.innerHTML = domContent.currentPlayerTurn(playerOne.name);
-
-      document.querySelectorAll('.cell').forEach(cell => cell.addEventListener('click', handleCellClick));
-    }
+        domContent.statusDisplay.innerHTML = domContent.currentPlayerTurn(playerOne.name);
+        domContent.checkchinking(handleCellClick);
+      }
+    });
   });
 
 
@@ -116,10 +123,18 @@ const Game = (() => {
 
     domContent.clearFields();
   }
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelector('.game--restart').addEventListener('click', handleRestartGame);
+  });
 
-  document.querySelector('.game--restart').addEventListener('click', handleRestartGame);
 
   return {
     winningConditions,
+    handlePlayerChange,
+    handleResultValidation,
+    handleCellPlayed,
+    checkWin,
   };
 })();
+
+module.exports = Game;
