@@ -54,6 +54,7 @@ const Game = (() => {
         roundWon = true;
         break;
       }
+      console.log(a)
     }
     if (roundWon) {
       domContent.statusDisplay.innerHTML = domContent.winningMessage(currentPlayer);
@@ -67,6 +68,7 @@ const Game = (() => {
       return;
     }
     handlePlayerChange();
+    return {roundWon, gameActive}
   }
 
   const handleCellClick = (clickedCellEvent) => {
