@@ -40,4 +40,3 @@ it('should handleResultValidation game active', () => {
 it('handleCellPlayed should return undefined', () => {
   expect(Game.handleCellPlayed()).toBeUndefined();
 });
-

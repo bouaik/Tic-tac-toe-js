@@ -73,7 +73,7 @@ const Game = (() => {
       return;
     }
     handlePlayerChange();
-    return { roundWon, gameActive };
+    return { roundWon, gameActive }; // eslint-disable-line
   }
 
   const handleCellClick = (clickedCellEvent) => {
@@ -116,8 +116,8 @@ const Game = (() => {
     Board.gameState = new Array(9).fill('');
     domContent.statusDisplay.innerHTML = domContent.currentPlayerTurn();
     /* eslint-disable no-return-assign */
-    // document.querySelectorAll('.cell')
-    //   .forEach(cell => cell.innerHTML = '');
+    document.querySelectorAll('.cell')
+      .forEach(cell => cell.innerHTML = '');
     /* eslint-enable no-return-assign */
     domContent.removeBoard();
 
@@ -134,7 +134,6 @@ const Game = (() => {
     handleResultValidation,
     handleCellPlayed,
     checkWin,
-    handleRestartGame
   };
 })();
 
