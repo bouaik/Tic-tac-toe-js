@@ -124,8 +124,9 @@ const Game = (() => {
 
   return {
     winningConditions,
-    handlePlayerChange
+    handlePlayerChange,
+    handleResultValidation
   };
 })();
 
-export default Game
+module.exports = Game;

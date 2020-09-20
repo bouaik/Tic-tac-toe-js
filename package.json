@@ -1,8 +1,9 @@
 {
-  "name": "Tic-tac-toe-js",
+  "name": "tic-tac-toe-js",
   "version": "1.0.0",
   "description": "> This is a Tic Tac game built by javascript",
   "main": "app.js",
+  "type": "module",
   "scripts": {
     "test": "jest"
   },
