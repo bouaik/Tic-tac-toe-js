@@ -33,6 +33,14 @@ Now you can open index.html in your browser to see TicTac-toe up and running.
 
 Enjoy playing it.
 
+## Testing
+
+Run
+```
+yarn
+yarn test
+```
+
 ## Authors
 
 👤 **Author1**
